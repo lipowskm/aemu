@@ -1373,13 +1373,6 @@ void get_game_code(char *buf, int len){
 	strncpy(buf, getGameCode(), len - 1);
 }
 
-// Callback Deny Function
-int cbdeny(int cbid)
-{
-	// By doing nothing, we prevent exit callback registration, thus block the home menu.
-	return 0;
-}
-
 // Killzone Fixed Pool Size Limiter
 int killzone_createfpl(char * name, int pid, uint32_t attr, uint32_t size, int blocks, void * param)
 {
@@ -3215,10 +3208,6 @@ int module_start(SceSize args, void * argp)
 				result = hook_import_bynid(utility, "ModuleMgrForKernel", nid[1], load_plugin_alt);
 				printk("User Loader Hook: %d\n", result);
 				if(result == 0) {
-					// Disable Home Menu
-					sctrlHENPatchSyscall((void*)sctrlHENFindFunction("sceLoadExec", "LoadExecForUser", 0x4AC57943), cbdeny);
-					printk("Disabled Home Menu!\n");
-					
 					// Enable Module Start Patching
 					sysctrl_patcher = sctrlHENSetStartModuleHandler(online_patcher);
 					printk("Enabled Game-Specific Fixes!\n");

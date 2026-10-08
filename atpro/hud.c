@@ -40,7 +40,7 @@
 #define BUTTON_CLONE_SHIFT 279
 #define BUTTON_MAPPINGS_ON_SCREEN 8
 #define BOTTOM_LINE 256
-#define EXIT_MESSAGE_X 227
+#define EXIT_MESSAGE_RIGHT_MARGIN 13
 #define MIDDLE_MESSAGE_Y 132
 #define MIDDLE_MESSAGE_X 90
 #define CHAT_BINDING_X 221
@@ -49,6 +49,7 @@
 // Graphical Macros
 #define GET_MIDDLE_ALIGN_X(t) (240 - strlen(t) * FONT_WIDTH / 2)
 #define GET_MIDDLE_ALIGN_Y(t) (136 - strlen(t) * FONT_WIDTH / 2)
+#define GET_RIGHT_ALIGN_X(t) (480 - EXIT_MESSAGE_RIGHT_MARGIN - (int)strlen(t) * FONT_WIDTH)
 
 // Position for Button Mapping (8-Character optimized)
 // UP, LEFT, DOWN, RIGHT, TRIANGLE, SQUARE, CROSS, CIRCLE
@@ -266,7 +267,8 @@ void drawInfo(CANVAS * canvas)
 	drawSmallFont(canvas, time, HORIZONTAL_PADDING, VERTICAL_PADDING, RGB_8888(0xFF, 0xFF, 0xFF));
 	
 	// Draw Exit Example
-	drawSmallFont(canvas, "HOME: CLOSE MENU   HOLD START: EXIT GAME", EXIT_MESSAGE_X, BOTTOM_LINE, RGB_8888(0x00, 0xFF, 0x00));
+	char * exit_message = "L + R + SELECT: CLOSE MENU   HOLD START: EXIT GAME";
+	drawSmallFont(canvas, exit_message, GET_RIGHT_ALIGN_X(exit_message), BOTTOM_LINE, RGB_8888(0x00, 0xFF, 0x00));
 }
 
 // Paint Notification Overlay
