@@ -2830,13 +2830,6 @@ int input_thread(SceSize args, void * argp)
 		// Register Button
 		curr_buttons = ctrl.Buttons;
 		
-		// Home Button pressed (and not pressing exit button)
-		if(!is_ark_standalone() && !is_exit_button_pressed && (prev_buttons & PSP_CTRL_HOME) == 0 && (curr_buttons & PSP_CTRL_HOME) != 0)
-		{
-			// Enable or Disable GUI Overlay
-			hud_on = !hud_on;
-		}
-
 		// New hud hotkey for standalone ARK
 		if(!is_exit_button_pressed &&
 			(prev_buttons & PSP_CTRL_SELECT) == 0 && (curr_buttons & PSP_CTRL_SELECT) != 0 &&
